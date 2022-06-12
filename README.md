@@ -1,9 +1,11 @@
 # degods-interview
 
-new file:   src/app.ts
-	new file:   src/controllers/posts.controller.ts
-new file:   src/controllers/wallets.controller.ts
-new file:   src/routes/routes.ts
-new file:   src/services/wallets.service.ts
-new file:   src/utils/metaplex.util.ts
-new file:   src/utils/theblockchainapi.util.ts
+## getting started 
+
+### `.env` file
+1. go to [blockchainapi](https://docs.blockchainapi.com/#section/How-to-Use-the-API) to create an API key pair.
+```
+PORT=8000
+BLOCKCHAIN_API_KEY_ID=<blockchain api key id>
+BLOCKCHAIN_API_SECRET_KEY=<blockchain api secret key>
+```
