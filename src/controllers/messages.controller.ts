@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
 import base58 from 'bs58'
-import nacl from 'tweetnacl'
+import { Request, Response, NextFunction } from 'express';
 import { Keypair } from '@solana/web3.js'
+import nacl from 'tweetnacl'
 
 import { MessageService } from '../services/messages.service';
 

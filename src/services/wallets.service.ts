@@ -1,11 +1,9 @@
-import { TheBlockchainAPI } from '../utils/theblockchainapi.util'
-import { MetaplexApi } from '../utils/metaplex.util'
-
 import { Nft } from "@metaplex-foundation/js-next";
 
-const blockchainApi: TheBlockchainAPI = new TheBlockchainAPI()
+import { MetaplexApi } from '../utils/metaplex.util'
+
 const metaplexApi: MetaplexApi = new MetaplexApi()
-// token standard https://docs.metaplex.com/programs/token-metadata/token-standard
+
 export interface NftMetadataAccount {
     key: string,
     updateAuthority: string,
@@ -23,6 +21,7 @@ export interface NftMetadataAccount {
     uses: string,
     offChainData: any
 }
+
 interface NftMetadataAccountCreators {
     address: string,
     verified: boolean,
@@ -30,18 +29,6 @@ interface NftMetadataAccountCreators {
 }
 
 export const WalletService = {
-    // TODO: check type
-    async getWalletNFTs(publicKey: string) {
-        let result: any 
-        try {
-            result = await blockchainApi.getWalletNFTs(publicKey);
-        } catch (e: any) {
-            return e.message
-        }
-
-        return result.nfts_metadata;
-    },
-
     async getWalletNFTsMetaplex(publicKey: string): Promise<NftMetadataAccount[]>{
         let result: Nft[]
         try {
