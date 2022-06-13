@@ -5,7 +5,7 @@ import { TransactionController } from '../controllers/transactions.controller';
 
 const router = express.Router();
 
-router.get('/wallet-metaplex/:id/nfts', WalletController.getWalletNFTsMetaplex);
+router.post('/wallet/nfts', WalletController.getWalletNFTsMetaplex);
 
 router.post('/message/verify', MessageController.verifyMessageSignature);
 router.get('/message/sign', MessageController.simulateMessageSignature);
