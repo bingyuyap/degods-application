@@ -25,7 +25,6 @@ export class MetaplexApi {
             return null;
         }
         
-
         let data: any = null
         try {
             data = await res.json();
@@ -35,8 +34,6 @@ export class MetaplexApi {
             }
             return e.message;
         }
-
         return data;
-
     }
 }
