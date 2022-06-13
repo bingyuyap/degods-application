@@ -1,12 +1,8 @@
-import { Metaplex } from "@metaplex-foundation/js-next";
+import { Metaplex, Nft } from "@metaplex-foundation/js-next";
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
-import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
-import fetch from 'node-fetch';
-
-
 export class MetaplexApi {
     // https://github.com/metaplex-foundation/js-next#findAllByOwner
-    async getWalletNFTsMetaplex(publicKey: string) {
+    async getWalletNFTsMetaplex(publicKey: string): Promise<Nft[]> {
         const connection = new Connection(clusterApiUrl("mainnet-beta"));
         const metaplex = new Metaplex(connection);
         try {
@@ -16,6 +12,7 @@ export class MetaplexApi {
         }
     }
 
+    // TODO: change to axios 
     async getOffChainData(uri: string) {
         let res: any = null;
         try {
