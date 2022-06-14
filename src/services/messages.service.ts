@@ -6,6 +6,11 @@ export const MessageService = {
         const publicKey: Uint8Array = base58.decode(pk)
         const messageBytes: Uint8Array = new TextEncoder().encode(message)
         const signatureBytes: Uint8Array = base58.decode(signature)
-        return nacl.sign.detached.verify(messageBytes, signatureBytes, publicKey)
+
+        try {
+            return nacl.sign.detached.verify(messageBytes, signatureBytes, publicKey)
+        } catch (e) {
+            throw e
+        }
     }
 }

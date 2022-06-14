@@ -34,10 +34,17 @@ export const MessageController = {
         let signature: string = req.body.signature
         let message: string = req.body.message
 
-        let result: boolean = await MessageService.verify(message, signature, wallet)
-        return res.status(200).json({
-            message: result
-        })
+        try {
+            let result: boolean = await MessageService.verify(message, signature, wallet)
+            return res.status(200).json({
+                message: result
+            })
+        } catch (e) {
+            return res.status(200).json({
+                message: (e as Error).message
+            })
+        }
+        
     }
 }
 
