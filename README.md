@@ -21,8 +21,11 @@ npm run dev
 ### APIs
 
 1. POST endpoint returning NFTs metadata in a wallet
+   
    **endpoint**: `/wallet/nfts`
+
    **method**: `POST`
+
    **body example**:
 
 ```json
@@ -31,11 +34,14 @@ npm run dev
 }
 ```
 
-2. POST endpoint verifying a signed message
+1. POST endpoint verifying a signed message
 
 - POST endpoint simulating signing a message that returns publicKey and signature
+  
   **endpoint**: `message/verify`
+
   **method**: `POST`
+
   **body**:
 
 ```json
@@ -49,8 +55,11 @@ npm run dev
 ```
 
 - POST endpoint verifying a signed message
+  
   **endpoint**: `message/verify`
+
   **method**: `POST`
+
   **body**:
 
 ```json
@@ -63,9 +72,12 @@ npm run dev
 }
 ```
 
-3. POST endpoint verifying a SPL transfer with (transactions hash, amount transferred, receiving wallet) as parameters\*\*
+1. POST endpoint verifying a SPL transfer with (transactions hash, amount transferred, receiving wallet) as parameters
+   
    **endpoint**: `spl-transfer/verify`
+
    **method**: `POST`
+
    **body**:
 
 ```json
