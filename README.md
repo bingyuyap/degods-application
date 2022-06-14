@@ -14,8 +14,7 @@ PORT=8000
 ### starting the programme on local machine
 
 ```sh
-yarn
-npm run dev
+yarn dev
 ```
 
 ### APIs
