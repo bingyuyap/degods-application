@@ -34,7 +34,7 @@ npm run dev
 }
 ```
 
-1. POST endpoint verifying a signed message
+2. POST endpoint verifying a signed message
 
 - POST endpoint simulating signing a message that returns publicKey and signature
   
@@ -72,7 +72,7 @@ npm run dev
 }
 ```
 
-1. POST endpoint verifying a SPL transfer with (transactions hash, amount transferred, receiving wallet) as parameters
+3. POST endpoint verifying a SPL transfer with (transactions hash, amount transferred, receiving wallet) as parameters
    
    **endpoint**: `spl-transfer/verify`
 
