@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 import { Metaplex, Nft } from "@metaplex-foundation/js-next"
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js"
+
 export class MetaplexApi {
     // https://github.com/metaplex-foundation/js-next#findAllByOwner
     async getWalletNFTsMetaplex(publicKey: string): Promise<Nft[]> {
