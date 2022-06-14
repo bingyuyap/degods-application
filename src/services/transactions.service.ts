@@ -5,47 +5,46 @@ import {
     TokenBalance, 
     ConfirmedTransactionMeta, 
     TokenAmount
-} from "@solana/web3.js";
+} from "@solana/web3.js"
 
 interface AccountSplTokenData { 
-    preTokenBalanceAmount: number;
-    postTokenBalanceAmount: number;
-    decimal: number;
+    preTokenBalanceAmount: number
+    postTokenBalanceAmount: number
+    decimal: number
 }
 
 export const TransactionService = {
     async getTransaction(transactionHash: string): Promise<TransactionResponse> {
-        const connection = new Connection(clusterApiUrl("mainnet-beta"));
+        const connection = new Connection(clusterApiUrl("mainnet-beta"))
 
-        const transaction: TransactionResponse | null = await connection.getTransaction(transactionHash);
+        const transaction: TransactionResponse | null = await connection.getTransaction(transactionHash)
 
         if (transaction == null) {
             const errorMsg: string = `Transaction not found for transaction id: ${transactionHash}`
             console.error(`[getTransaction] ${errorMsg}`)
             throw new Error(errorMsg)
         } else {
-            return transaction;
+            return transaction
         }
     },
 
-    async getAccountSplTokenData(transactionMeta: ConfirmedTransactionMeta, publicKey: string, splToken: string): Promise<AccountSplTokenData> {
+    async getAccountSplTokenData(transactionMeta: ConfirmedTransactionMeta, publicKey: string): Promise<AccountSplTokenData> {
         const preTokenBalances: TokenBalance[] | null | undefined = transactionMeta.preTokenBalances
         const postTokenBalances: TokenBalance[] | null | undefined = transactionMeta.postTokenBalances
 
         if (preTokenBalances == null || postTokenBalances == null) {
             const errorMsg: string = `no token balance found`
             console.error(`[getAccountSplTokenData] ${errorMsg}`)
-            throw new Error(`no token balances found`);
+            throw new Error(`no token balances found`)
         }
 
-        let walletPreTokenBalance: TokenAmount | null = await this.getTokenBalanceByOwnerAndMint(publicKey, splToken, preTokenBalances);
-        let walletPostTokenBalance: TokenAmount | null = await this.getTokenBalanceByOwnerAndMint(publicKey, splToken, postTokenBalances);
-
+        let walletPreTokenBalance: TokenAmount | null = await this.getTokenBalanceByOwner(publicKey, preTokenBalances)
+        let walletPostTokenBalance: TokenAmount | null = await this.getTokenBalanceByOwner(publicKey, postTokenBalances)
 
         if (walletPreTokenBalance == null || walletPostTokenBalance == null) {
             const errorMsg: string = `no token balance found`
             console.error(`[getAccountSplTokenData] ${errorMsg}`)
-            throw new Error(errorMsg);
+            throw new Error(errorMsg)
         }
 
         // using amount but not uiAmount for higher precision?
@@ -72,30 +71,30 @@ export const TransactionService = {
         return accountSplTokenData
     },
 
-    async getTokenBalanceByOwnerAndMint(owner: string, mint: string, tokenBalances: TokenBalance[]): Promise<TokenAmount | null>{
+    async getTokenBalanceByOwner(owner: string, tokenBalances: TokenBalance[]): Promise<TokenAmount | null>{
         for (const tokenBalance of tokenBalances) {
-            if (tokenBalance.mint == mint && tokenBalance.owner == owner) {
-                return tokenBalance.uiTokenAmount;
+            if (tokenBalance.owner == owner) {
+                return tokenBalance.uiTokenAmount
             }
         }
-        return null;
+        return null
     },
 
     async verifySplTransfer(transactionHash: string, publicKey: string, splToken: string, amountTransferred: number): Promise<boolean> {
         console.log(`[verifySplTransfer] transactionHash: ${transactionHash}, publicKey: ${publicKey}, amountTransferred: ${amountTransferred}`)
         
         try {
-            const transactionResponse: TransactionResponse = await this.getTransaction(transactionHash);
+            const transactionResponse: TransactionResponse = await this.getTransaction(transactionHash)
 
             if (transactionResponse == null || transactionResponse.meta == null) {
                 const errorMsg: string = `no transaction found for transaction hash ${transactionHash}`
                 console.error(`[verifySplTransfer] ${errorMsg}`)
-                throw new Error(errorMsg);
+                throw new Error(errorMsg)
             }
     
-            const accountSplTokenData = await this.getAccountSplTokenData(transactionResponse.meta, publicKey, splToken);
+            const accountSplTokenData: AccountSplTokenData = await this.getAccountSplTokenData(transactionResponse.meta, publicKey)
     
-            return amountTransferred * Math.pow(10, accountSplTokenData.decimal) == accountSplTokenData.postTokenBalanceAmount - accountSplTokenData.preTokenBalanceAmount;
+            return amountTransferred * Math.pow(10, accountSplTokenData.decimal) == accountSplTokenData.postTokenBalanceAmount - accountSplTokenData.preTokenBalanceAmount
         } catch (e) {
             throw e
         }

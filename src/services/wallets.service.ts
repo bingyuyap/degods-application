@@ -1,4 +1,4 @@
-import { Nft } from "@metaplex-foundation/js-next";
+import { Nft } from "@metaplex-foundation/js-next"
 
 import { MetaplexApi } from '../utils/metaplex.util'
 
@@ -37,7 +37,7 @@ export const WalletService = {
         } catch (e: any) {
             return e.message
         }
-        let nftMetadataArray: NftMetadataAccount[] = new Array();
+        let nftMetadataArray: NftMetadataAccount[] = new Array()
 
         for (var nft of result) {
             // convert fetched json object to a flattened json object
@@ -50,7 +50,7 @@ export const WalletService = {
 }
 
 let getNftMetadata = async function (walletNFT: any): Promise<NftMetadataAccount> {
-    let metadataAccount: any = walletNFT.metadataAccount;
+    let metadataAccount: any = walletNFT.metadataAccount
 
     let nftMetadata: NftMetadataAccount = {
         // TODO: not very sure what this key 
@@ -70,7 +70,7 @@ let getNftMetadata = async function (walletNFT: any): Promise<NftMetadataAccount
         collection: walletNFT.collection,
         uses: walletNFT.uses,
         offChainData: await metaplexApi.getOffChainData(walletNFT.uri),
-    };
+    }
 
-    return nftMetadata;
+    return nftMetadata
 }

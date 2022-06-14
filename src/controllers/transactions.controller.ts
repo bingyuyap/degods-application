@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import { TransactionResponse } from "@solana/web3.js";
+import { Request, Response, NextFunction } from 'express'
+import { TransactionResponse } from "@solana/web3.js"
 
 import { TransactionService } from '../services/transactions.service'
 
@@ -19,7 +19,7 @@ export const TransactionController = {
         } catch (e) {
             return res.status(200).json({
                 message: (e as Error).message
-            });
+            })
         }
 
         
@@ -32,11 +32,11 @@ export const TransactionController = {
             const transaction: TransactionResponse = await TransactionService.getTransaction(transactionHash)
             return res.status(200).json({
                 message: transaction
-            });
+            })
         } catch (e) {
             return res.status(200).json({
                 message: (e as Error).message
-            });
+            })
         }
     },
 }

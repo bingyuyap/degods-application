@@ -1,9 +1,9 @@
 import base58 from 'bs58'
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express'
 import { Keypair } from '@solana/web3.js'
 import nacl from 'tweetnacl'
 
-import { MessageService } from '../services/messages.service';
+import { MessageService } from '../services/messages.service'
 
 export const MessageController = {
     async simulateMessageSignature(req: Request, res: Response, next: NextFunction) {
@@ -37,7 +37,7 @@ export const MessageController = {
         let result: boolean = await MessageService.verify(message, signature, wallet)
         return res.status(200).json({
             message: result
-        });
+        })
     }
 }
 

@@ -1,16 +1,16 @@
-import express from 'express';
-import { WalletController } from '../controllers/wallets.controller';
-import { MessageController } from '../controllers/messages.controller';
-import { TransactionController } from '../controllers/transactions.controller';
+import express from 'express'
+import { WalletController } from '../controllers/wallets.controller'
+import { MessageController } from '../controllers/messages.controller'
+import { TransactionController } from '../controllers/transactions.controller'
 
-const router = express.Router();
+const router = express.Router()
 
-router.post('/wallet/nfts', WalletController.getWalletNFTsMetaplex);
+router.post('/wallet/nfts', WalletController.getWalletNFTsMetaplex)
 
-router.post('/message/verify', MessageController.verifyMessageSignature);
-router.get('/message/sign', MessageController.simulateMessageSignature);
+router.post('/message/verify', MessageController.verifyMessageSignature)
+router.get('/message/sign', MessageController.simulateMessageSignature)
 
-router.get('/transaction', TransactionController.getTransaction);
-router.post('/spl-transfer/verify', TransactionController.verifySplTransfer);
+router.get('/transaction', TransactionController.getTransaction)
+router.post('/spl-transfer/verify', TransactionController.verifySplTransfer)
 
-export = router;
+export = router
