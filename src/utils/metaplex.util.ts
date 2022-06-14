@@ -7,7 +7,7 @@ export class MetaplexApi {
         const metaplex = new Metaplex(connection);
         try {
             return await metaplex.nfts().findAllByOwner(new PublicKey(publicKey));
-        } catch (e: any) {
+        } catch (e) {
             throw e;
         }
     }

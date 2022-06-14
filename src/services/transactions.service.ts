@@ -76,7 +76,7 @@ export const TransactionService = {
     async verifySplTransfer(transactionHash: string, publicKey: string, splToken: string, amountTransferred: number): Promise<boolean> {
         try {
             const transactionResponse: TransactionResponse = await this.getTransaction(transactionHash);
-            
+
             if (transactionResponse == null || transactionResponse.meta == null) {
                 throw new Error(`no transaction found for transaction hash ${transactionHash}`);
             }
