@@ -13,7 +13,7 @@ export class MetaplexApi {
         }
     }
 
-    async getOffChainData2(uri: string) {
+    async getOffChainData(uri: string) {
         let response: AxiosResponse;
         try {
             response = await axios.get(uri);
