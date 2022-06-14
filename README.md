@@ -1,5 +1,5 @@
 # degods-interview
-aka my first time doing typescript and node.js 
+aka my first time using typescript and node.js 
 
 <img src="assets/imgs/pepesad.jpeg" alt="drawing" style="width:100px;"/>
 
