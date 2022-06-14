@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from 'axios';
 import { Metaplex, Nft } from "@metaplex-foundation/js-next";
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
 export class MetaplexApi {
@@ -12,28 +13,17 @@ export class MetaplexApi {
         }
     }
 
-    // TODO: change to axios 
-    async getOffChainData(uri: string) {
-        let res: any = null;
+    async getOffChainData2(uri: string) {
+        let response: AxiosResponse;
         try {
-            res = await fetch(uri, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-        } catch (e: any) {
-            return null;
+            response = await axios.get(uri);
+            return response.data;
+        } catch (e) {
+            // offChainData might not be available, dont throw error
+            console.log(`[getOffChainData2] failed to fetch data from uri: ${uri}`)
+            return {
+                "error": `failed to fetch data from uri: ${uri}`
+            };
         }
-        
-        let data: any = null
-        try {
-            data = await res.json();
-        } catch (e: any) {
-            if (e instanceof TypeError) {
-                data = await res.text();
-            }
-            return e.message;
-        }
-        return data;
     }
 }
