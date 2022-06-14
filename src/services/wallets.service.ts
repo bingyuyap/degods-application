@@ -30,6 +30,7 @@ interface NftMetadataAccountCreators {
 
 export const WalletService = {
     async getWalletNFTsMetaplex(publicKey: string): Promise<NftMetadataAccount[]>{
+        console.log(`[getWalletNFTsMetaplex] publicKey: ${publicKey}`)
         let result: Nft[]
         try {
             result = await metaplexApi.getWalletNFTsMetaplex(publicKey)
@@ -40,8 +41,8 @@ export const WalletService = {
 
         for (var nft of result) {
             // convert fetched json object to a flattened json object
+            console.log(`[getWalletNFTsMetaplex] converting data for NFT:  ${nft.metadataAccount.publicKey}`)
             nftMetadataArray.push(await getNftMetadata(nft))
-            console.log("NFT: " + nft.metadataAccount.publicKey)
         }
 
         return nftMetadataArray

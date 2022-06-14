@@ -20,7 +20,9 @@ export const TransactionService = {
         const transaction: TransactionResponse | null = await connection.getTransaction(transactionHash);
 
         if (transaction == null) {
-            throw new Error(`Transaction not found for transaction id: ${transactionHash}`)
+            const errorMsg: string = `Transaction not found for transaction id: ${transactionHash}`
+            console.error(`[getTransaction] ${errorMsg}`)
+            throw new Error(errorMsg)
         } else {
             return transaction;
         }
@@ -31,6 +33,8 @@ export const TransactionService = {
         const postTokenBalances: TokenBalance[] | null | undefined = transactionMeta.postTokenBalances
 
         if (preTokenBalances == null || postTokenBalances == null) {
+            const errorMsg: string = `no token balance found`
+            console.error(`[getAccountSplTokenData] ${errorMsg}`)
             throw new Error(`no token balances found`);
         }
 
@@ -39,7 +43,9 @@ export const TransactionService = {
 
 
         if (walletPreTokenBalance == null || walletPostTokenBalance == null) {
-            throw new Error(`no token balance found`);
+            const errorMsg: string = `no token balance found`
+            console.error(`[getAccountSplTokenData] ${errorMsg}`)
+            throw new Error(errorMsg);
         }
 
         // using amount but not uiAmount for higher precision?
@@ -49,7 +55,9 @@ export const TransactionService = {
         let postTokenBalanceDecimal: number | null = walletPostTokenBalance.decimals
 
         if (preTokenBalanceUiAmount == null || postTokenBalanceUiAmount == null || postTokenBalanceDecimal == null) {
-            throw new Error(`no ui amount found`)
+            const errorMsg: string = `no ui amount found`
+            console.error(`[getAccountSplTokenData] ${errorMsg}`)
+            throw new Error(errorMsg)
         }
 
         console.log("preTokenBalanceUiAmount: " + preTokenBalanceUiAmount)
@@ -74,11 +82,15 @@ export const TransactionService = {
     },
 
     async verifySplTransfer(transactionHash: string, publicKey: string, splToken: string, amountTransferred: number): Promise<boolean> {
+        console.log(`[verifySplTransfer] transactionHash: ${transactionHash}, publicKey: ${publicKey}, amountTransferred: ${amountTransferred}`)
+        
         try {
             const transactionResponse: TransactionResponse = await this.getTransaction(transactionHash);
 
             if (transactionResponse == null || transactionResponse.meta == null) {
-                throw new Error(`no transaction found for transaction hash ${transactionHash}`);
+                const errorMsg: string = `no transaction found for transaction hash ${transactionHash}`
+                console.error(`[verifySplTransfer] ${errorMsg}`)
+                throw new Error(errorMsg);
             }
     
             const accountSplTokenData = await this.getAccountSplTokenData(transactionResponse.meta, publicKey, splToken);
