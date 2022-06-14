@@ -46,11 +46,9 @@ npm run dev
 
 ```json
 {
-   {
     "publicKey": "8wNrgAiDrbMHz6jTcMn9SCqYJGvPAR1e1sJD8kADPyPs",
     "signature": "4TYUZC3QDTb48GBnTuBW2j6Zcfr3NNWX6M4K8Xm7cienp2FaNrQxwYzKQcJVfoPQ6NtXjgTrB4aLLYRmtPd5CxSf",
     "message": "yeet"
-}
 }
 ```
 
@@ -64,11 +62,9 @@ npm run dev
 
 ```json
 {
-   {
     "publicKey": "8wNrgAiDrbMHz6jTcMn9SCqYJGvPAR1e1sJD8kADPyPs",
     "signature": "4TYUZC3QDTb48GBnTuBW2j6Zcfr3NNWX6M4K8Xm7cienp2FaNrQxwYzKQcJVfoPQ6NtXjgTrB4aLLYRmtPd5CxSf",
     "message": "yeet"
-}
 }
 ```
 
