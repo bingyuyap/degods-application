@@ -7,8 +7,13 @@ import { MessageService } from '../services/messages.service'
 
 export const MessageController = {
     async simulateMessageSignature(req: Request, res: Response, next: NextFunction) {
-        // use solana web3 js to create KeyPair object
-        const keyPair: Keypair = new Keypair
+        if (process.env.PAYER_SECRET_KEY === undefined) {
+            throw new Error(`Payer Secret Key not found please update dotenv file!`)
+        }
+
+        // generate payer and receiver keypair
+        const payerSecretKey: Uint8Array = Uint8Array.from(base58.decode(process.env.PAYER_SECRET_KEY))
+        const keyPair: Keypair = Keypair.fromSecretKey(payerSecretKey)
         // get keyPair separately
         const pubKey: Uint8Array = keyPair.publicKey.toBytes()
         const privKey: Uint8Array = keyPair.secretKey

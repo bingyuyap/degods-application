@@ -21,8 +21,6 @@ export const TransactionController = {
                 message: (e as Error).message
             })
         }
-
-        
     },
 
     async getTransaction(req: Request, res: Response, next: NextFunction) {
