@@ -29,6 +29,7 @@ export const MessageController = {
             message: {
                 "publicKey": base58.encode(pubKey),
                 "signature": base58.encode(signature),
+                "sigBuffer": signature.toString()
             }
         })
 
